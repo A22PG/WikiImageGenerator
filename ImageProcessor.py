@@ -106,7 +106,7 @@ class ImageProcessor(object):
   | map = \n%d, %d, %d, %d, %s
   | height = %d
   | startframe = 16
-  }}<noinclude>{{{{3D viewer}}[[Category:{lang_category}]]''' % (
+  }}}}<noinclude>{{{{3D viewer}}}}[[Category:{lang_category}]]''' % (
             "url",
             datetime.strftime(datetime.utcnow(), '%Y%m%d%H%M%S'),
             curr_offset,
