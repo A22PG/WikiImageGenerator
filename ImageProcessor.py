@@ -100,6 +100,8 @@ class ImageProcessor(object):
         lang_category = "3D model images"
         if self.context.window_manager.wiki_language == 'es':
             lang_category = "Imágenes de modelos 3D"
+        if self.context.window_manager.wiki_language == 'fr':
+            lang_category = "Images de modèles 3D"
         
         description = f'''{{{{#switch: {{{{{{1|}}}}}}
   | url = <nowiki>%s?%s</nowiki>

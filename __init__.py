@@ -31,7 +31,7 @@ bl_info = {
     "author": "Radiator Syrup",
     "description": "An addon to automate the rendering of game models into 2d images",
     "blender": (2, 80, 0),
-    "version": (2, 0, 0),
+    "version": (2, 0, 1),
     "location": "",
     "warning": "",
     "category": "Generic"
@@ -157,8 +157,9 @@ class SPLT_preferences(bpy.types.AddonPreferences):
     bl_idname = __name__
 
     game_type: bpy.props.EnumProperty(
+        name="Game",
         items=[
-            ('noGame', 'Choose a game', 'Choose a game'),
+            ('noGame', 'Without preferences', 'No game-specific preferences apply'),
             ('acnh', 'Animal Crossing: New Horizons', 'For Animal Crossing Enciclopedia'),
             ('acnl', '(experimental) Animal Crossing: New Leaf', 'For Animal Crossing Enciclopedia'),
             ('splat2', 'Splatoon 2', 'For Inkipedia and Inkipedia ES'),
@@ -169,9 +170,11 @@ class SPLT_preferences(bpy.types.AddonPreferences):
     )
 
     wiki_language: bpy.props.EnumProperty(
+        name="Category languaje",
         items=[
             ('en', 'English', 'Category will be added in English'),
             ('es', 'Spanish', 'Category will be added in Spanish'),
+            ('fr', 'French', 'Category will be added in French'),
         ],
         default=None,
     )
@@ -192,6 +195,8 @@ class SPLT_preferences(bpy.types.AddonPreferences):
         layout.prop(self, "wiki_language")
         layout.prop(self, "delete_tmp")
         layout.prop(self, "delete_preview")
+        layout.operator(
+            SPLT_OT_install_dependencies.bl_idname, icon="CONSOLE")
 
 
 preference_classes = (SPLT_PT_warning_panel,
@@ -331,6 +336,7 @@ def register():
     items=[
         ('en', 'English', 'Category will be added in English'),
         ('es', 'Spanish', 'Category will be added in Spanish'),
+        ('fr', 'French', 'Category will be added in French'),
     ],
     default=bpy.context.preferences.addons[__name__].preferences.wiki_language,
     )
