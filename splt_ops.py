@@ -149,8 +149,6 @@ class CheckRotateModel(bpy.types.Operator):
 
         if event.type == 'TIMER':
             speed = float(context.window_manager.rotation_speed)
-            if speed == 0:
-                return {'PASS_THROUGH'}  # Congela la animación si la velocidad es 0
 
             subject = context.window_manager.objectselection_props
             bpy.ops.object.select_all(action='DESELECT')
@@ -188,7 +186,7 @@ class CheckRotateModel(bpy.types.Operator):
             return {'FINISHED'}
         
         self.is_rotating = True
-        wm["is_rotating"] = True  # Bloquea el resto del addon excepto "Checker"
+        wm["is_rotating"] = True
         
         time_step = 0.1 / float(context.window_manager.rotation_speed)
         self._timer = wm.event_timer_add(time_step, window=context.window)
@@ -204,8 +202,8 @@ class CheckRotateModel(bpy.types.Operator):
         obj.rotation_euler = self.original_rotation.copy()
         wm.event_timer_remove(self._timer)
         self.is_rotating = False
-        wm["is_rotating"] = False  # Reactiva el resto del addon
-        self.limits = 0  # Reinicia el contador de pasos
+        wm["is_rotating"] = False
+        self.limits = 0
 
     @classmethod
     def poll(cls, context):
